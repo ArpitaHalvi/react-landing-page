@@ -1,8 +1,8 @@
 import React from "react";
 import "./Shop.scss";
 import ShoppingCard from "./ShoppingCard";
-import Clothes from "../../data";
-import { ArrowBackIos, ArrowBackOutlined } from "@mui/icons-material";
+import Clothes from "../data";
+import { ArrowBackOutlined } from "@mui/icons-material";
 import { NavLink } from "react-router-dom";
 
 export default function Shop() {
