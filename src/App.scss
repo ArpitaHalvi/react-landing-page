@@ -1,0 +1,359 @@
+// Colors used - #d6ccc2 #edede9 #f5ebe0 #e3d5ca #d5bdaf
+@mixin flex-box($justify-content:center,$align-items:center,$flex-dir:row){
+    display: flex;
+    align-items: $align-items;
+    justify-content: $justify-content;
+    flex-direction: $flex-dir;
+}
+
+@mixin res-grid($col-width:50%){
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax($col-width,1fr));
+    place-items: center;
+}
+
+@mixin img-setting($width:100%,$height:100%,$object-fit:contain){
+    width: $width;
+    height: $height;
+    aspect-ratio: 3/2;
+    object-fit: $object-fit;
+}
+
+// ************************* NAVBAR STYLES *********************
+header,nav,ul{
+    width: 100%;
+    height: 10vh;
+    @include flex-box;
+}
+
+header{
+    border-bottom: 1px solid #d5bdaf;
+    .logo{
+       width: 3rem; 
+       height: 3rem; 
+    }
+    nav{
+        justify-content: space-around;
+        ul:nth-of-type(1){
+            width: 60%;
+            justify-content: space-around;
+        }
+        ul:nth-of-type(2){
+            width: 20%;
+            justify-content: space-evenly;
+        }
+    }
+    div{
+        @include flex-box;
+        width: 20%;
+    }
+    .menuIcon{
+       display: none;
+    }
+}
+
+
+ul li{
+    list-style: none;
+    a{
+        font-size: 1.2rem;
+    }
+}
+
+
+@media (width<=700px){
+    header{
+        ul{
+            display: none;
+        }
+        .menuIcon{
+            display: block;
+        }
+        div , .menuIcon{
+           @include res-grid; 
+        }
+        div{
+            float: left;
+        }
+    }
+}
+
+// ****************** INTRO PART STYLES *****************
+
+.intro-section{
+    width: 100%;
+    height: 90vh;
+    padding: 1rem;
+    @include res-grid;
+    .tagline {
+            h1 {
+                font-size: 4.5rem;
+                font-weight: 400;
+                text-transform: capitalize;
+            }
+    
+            p {
+                font-size: 1.4rem;
+            }
+    
+            button {
+                margin: 2% 0;
+                padding: .5rem .7rem;
+                border-radius: .3rem;
+                border: none;
+                background-color: #d5bdaf;
+                font-size: 1.2rem;
+                text-transform: uppercase;
+                @include flex-box;
+                gap: .5rem;
+                cursor: pointer;
+            }
+        }
+        .intro-img {
+            @include flex-box;
+            img {
+                @include img-setting;
+                filter: drop-shadow(10px 10px 5px grey)
+            }
+        }
+}
+
+@media (100px<=width<=900px){
+    .intro-section{
+        @include res-grid(100%);
+        .tagline{
+            text-align: center;
+            h1{
+                font-size: 3rem;
+            }
+            p{
+                font-size: 1.4rem;
+            }
+            button{
+                margin: 2% auto 2% auto;
+            }
+        }
+        .intro-img img{
+            @include img-setting(50%, 50%,cover);
+        }
+    }
+}
+
+@media (width<=500px){
+    .intro-section{
+        .intro-img img{
+            @include img-setting(70%, 70%,cover);
+        }
+    }
+}
+
+
+// ****************** SERVICES STYLES ********************
+.services-section{
+    background-color: #d5bdaf;
+    padding: 1.5rem;
+    @include flex-box(center,first baseline);
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.services-card{
+    width: 25%;
+    padding: 1rem;
+    @include flex-box;
+    text-align: center;
+    flex-direction: column;
+    h4{
+        font-size: 1.4rem;
+        font-weight: 400;
+    }
+    p{
+        font-size: 1rem;
+        text-transform: capitalize;
+    }
+    .service-icons {
+        width: 2rem;
+        height: 2rem;
+    }
+}
+
+@media (width<=700px){
+    .services-section{
+        @include flex-box($flex-dir:column);
+        .services-card{
+            width: 60%;
+            border-bottom: 1px solid white;
+            h4{
+                font-size: 1.7rem;
+            }
+            p{
+                font-size: 1.1rem;
+            }
+        }
+        .services-card:nth-last-of-type(1){
+            border: none;
+        }
+    }
+}
+
+// ******************* CATEGORY STYLES **********************
+
+.category-section{
+    width: 100%;
+    padding: 1rem;
+    @include res-grid(calc(100%/3));
+    gap: 2rem;
+}
+
+.category-section .collections{
+    width: 100%;
+    background-color: #edede9;
+    border-radius: .4rem;
+    text-align: center;
+    padding: 2rem;
+    @include flex-box;
+}
+
+.collections img{
+    @include img-setting($height:90%);
+    border-radius: .4rem;
+    mix-blend-mode: luminosity;
+}
+
+.collections img:hover{
+    filter: brightness(60%);
+}
+
+.collections h2{
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+@media (100px<=width<=900px){
+    .category-section{
+        @include res-grid(100%);
+        .collections img{
+            @include img-setting(70%, 70%);
+        }
+    }
+}
+
+@media (width<=500px) {
+    .category-section{
+        .collections{
+            width: 80%;
+            @include flex-box($flex-dir:column);
+            gap: 1rem;
+        }
+    }
+}
+
+// ****************** FOOTER STYLES ***********************
+footer{
+    @include flex-box($flex-dir:column);
+    background-color: #d5bdaf;
+    .footer-part{
+        width: 100%;
+        @include res-grid($col-width:calc(100%/4));
+        place-items: first baseline;
+        .footer-links{
+            width: 60%;
+            @include flex-box(space-around,flex-start,column);
+            padding: 1rem;
+            h5{
+                font-size: 1.8rem;
+                font-weight: 100;
+            }
+            ul{
+                width: 100%;
+                height: 90%;
+                @include flex-box(flex-start,flex-start,column);
+                gap: .5rem;
+                padding: 1rem;
+                li{
+                    font-size: 1.2rem;
+                }
+            }
+        }
+    }
+    .copyright{
+        width: 100%;
+        text-align: center;
+        @include flex-box;
+        p{
+            width: 90%;
+            padding: 1rem;
+            border-top: 1px solid white;
+            font-size: 1.3rem;
+        }
+    }
+}
+
+@media (500px<=width<=900px){
+    footer{
+       .footer-part{
+          @include res-grid;
+          .footer-links{
+            h5{
+                font-size: 1.7rem;
+            }
+            ul li{
+                font-size: 1.1rem;
+            }
+          }
+        }
+    }
+}
+
+@media (width<=500px){
+    footer{
+        .footer-part {
+                @include res-grid;
+                place-items: first baseline;
+        
+                .footer-links {
+                    h5 {
+                        font-size: 1.5rem;
+                    }
+        
+                    ul li {
+                        font-size: 1rem;
+                    }
+                }
+            }
+    }
+}
+
+// ******************* ABOUT PAGE STYLES ************************
+.about-page{
+    height: 90vh;
+    background-color: #d5bdaf;
+    padding: 1rem;
+    @include flex-box;
+    .about{
+        text-align: center;
+        font-size: 2rem;  
+    }
+}
+
+// ******************************* ERROR PAGE STYLES ****************************
+.error-page {
+    height: 90vh;
+    @include flex-box($flex-dir: column);
+
+    .error {
+        @include flex-box($flex-dir: column);
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 400;
+        }
+
+        a {
+            @include flex-box;
+            gap: .5rem;
+            font-size: 1.2rem;
+        }
+    }
+}
+

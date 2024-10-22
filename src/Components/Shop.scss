@@ -1,0 +1,219 @@
+// @import "../App.scss";
+
+@mixin flex-box($justify-content:space-between){
+    display: flex;
+    justify-content: $justify-content;
+    align-items: center;  
+    flex-direction: column;
+}
+@mixin grid-layout($col-width:calc(100%/4)){
+   display: grid;
+   grid-template-columns: repeat(auto-fill,minmax($col-width,1fr));
+   place-items: center;
+   gap: 1rem;
+   padding: 1rem;
+}
+.shop-section{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.fashion-images{
+    width: 100%;
+    height: 90vh;
+    background: url("../assets/group-photo.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter:brightness(70%);
+    @include flex-box;
+    .offer-tag{
+        width: 60%;
+        height: 100%;
+        font-size: 4rem;
+        text-transform: capitalize;
+        text-align: center;
+        margin-top: 20%;
+        color: yellow;
+        filter: drop-shadow(5px 5px 5px black);
+    }
+}
+
+.categories{
+   font-size: 2rem;
+   font-weight: 400;
+   padding: 1rem 0;
+   text-transform: uppercase;
+}
+
+
+.shop-section{
+    .category-wear{
+       @include grid-layout;
+       padding: .5rem;
+    }
+}
+
+.category-wear .shopping-card{
+    width: 90%;
+    height: 100%;
+    background-color: white;
+    filter: drop-shadow(5px 5px 5px grey);
+    border-radius: .3rem;
+    padding: .5rem;
+    @include flex-box;
+    animation: appear 7s linear;
+    animation-timeline: view();
+    animation-range: entry 0 cover 40%;
+}
+
+@keyframes appear{
+    from{
+        opacity: 0;
+        scale: .5;
+        // transform: translateX(-100px);
+        // clip-path: inset( 100% 100% 0 0);
+    }
+    to{
+        opacity: 1;
+        scale: 1;
+        // transform: translateX(0);
+        // clip-path: inset( 0 0 0 0);
+    }
+}
+
+@media (500px<=width<=1000px){
+    .shop-section{
+        .fashion-images{
+            .offer-tag{
+                margin-top: 40%;
+                font-size: 2.5rem;
+            }
+        }
+        .category-wear{
+            @include grid-layout(calc(100%/2));
+            .shopping-card{
+                width: 50%;
+            }
+        }
+    }
+}
+
+@media (width<500px){
+    .shop-section{
+        .fashion-images{
+            .offer-tag{
+                margin-top: 60%;
+                font-size: 2rem;
+            }
+        }
+        .category-wear{
+            @include grid-layout(100%);
+            .shopping-card{
+                width: 70%;
+            }
+        }
+    }
+}
+
+.go-back{
+    padding: 1rem;
+    a{
+        border-radius: 50%;
+        filter: drop-shadow(5px 5px 5px grey);
+    }
+}
+
+
+.shopping-card img{
+    width: 100%;
+    height: 50%;
+    aspect-ratio: 3/2;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+    // background-color: #d8d2d2;
+}
+
+.shopping-card .cloth-details{
+    @include flex-box(space-around);
+    // background-color: #d5bdaf;
+    padding: .5rem;
+    width: 100%;
+    height: 40%;
+}
+
+.cloth-details h5{
+    font-size: 1.5rem;
+    font-weight: 100;
+}
+
+.cloth-details .org-price,p{
+    font-size: 1.1rem;
+}
+
+.cloth-details .org-price{
+    color: grey;
+}
+
+.cloth-details .org-price{
+    text-decoration: line-through;
+}
+
+.cloth-details .discount{
+    color: green;
+}
+
+.cloth-details .discounted-price{
+    font-size: 1.2rem;
+
+}
+
+// ******************* CART SECTION STYLES ******************
+.cart-section{
+    width: 100%;
+    height: 90vh;
+    @include flex-box;
+    .empty-cart{
+        width: 80%;
+        height: 100%;
+        @include flex-box($justify-content:center);
+        color: grey;
+        h3{
+            width: 50%;
+            text-align: center;
+            font-size: 4rem;
+            text-transform: uppercase;
+            font-weight: 400;
+        }
+        p{
+            padding: 1rem;
+            font-size: 1.8rem;
+            @include flex-box
+            ($justify-content:center);
+            gap: 1rem;
+            flex-direction: row;
+            a{
+                @include flex-box($justify-content:center);
+                flex-direction: row;
+                gap: 1rem;
+                padding: .7rem;
+                background-color: #d5bdaf;
+                border-radius: .4rem;
+            }
+        }
+    }
+}
+
+@media (width<=700px){
+    .cart-section{
+        .empty-cart{
+            h3{
+                font-size: 3rem;
+            }
+        }
+    }
+}
